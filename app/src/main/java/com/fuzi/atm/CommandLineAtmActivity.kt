@@ -16,7 +16,8 @@ class CommandLineAtmActivity : AppCompatActivity() {
 
         val commands = arrayOf("deposit 20", "withdraw 10")
 
-        val commandRouter = CommandRouter()
+        val commandRouterFactory = DaggerCommandRouterFactory.create();
+        val commandRouter = commandRouterFactory.router()
         for (command in commands) {
             commandRouter.route(command)
         }

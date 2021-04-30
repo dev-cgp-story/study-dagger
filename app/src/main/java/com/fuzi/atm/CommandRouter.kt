@@ -2,9 +2,14 @@ package com.fuzi.atm
 
 import android.util.Log
 import java.util.*
+import javax.inject.Inject
 
-internal class CommandRouter {
+class CommandRouter {
     private val commands: Map<String?, Command> = emptyMap()
+
+    @Inject
+    constructor()
+
     fun route(input: String): Command.Status? {
         val splitInput =
             split(input)
