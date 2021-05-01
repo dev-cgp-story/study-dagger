@@ -2,6 +2,8 @@ package com.fuzi.atm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dagger.Component
+import javax.inject.Singleton
 
 val TAG = "ATM App"
 
@@ -14,12 +16,17 @@ class CommandLineAtmActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val commands = arrayOf("hello", "deposit 강명신 10000", "login 강명신", "deposit 강명신 5000")
+        val commands = arrayOf("hello", "login 강명신", "deposit 5000", "deposit 5000")
+        val commandProcessor = DaggerCommandLineAtmActivity_CommandProcessorFactory.create().processor()
 
-        val commandRouterFactory = DaggerCommandRouterFactory.create();
-        val commandRouter = commandRouterFactory.router()
         for (command in commands) {
-            commandRouter.route(command)
+            commandProcessor.process(command)
         }
+    }
+
+    @Singleton
+    @Component(modules = [HelloWorldModule::class, LoginCommandModule::class, SystemOutModule::class, UserCommandsRouter.InstallationModule::class])
+    interface CommandProcessorFactory {
+        fun processor(): CommandProcessor
     }
 }

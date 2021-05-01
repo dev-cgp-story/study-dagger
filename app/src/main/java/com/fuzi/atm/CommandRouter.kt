@@ -12,12 +12,12 @@ class CommandRouter @Inject constructor(val commands: Map<String, @JvmSuppressWi
         }
         val commandKey = splitInput[0]
         val command = commands[commandKey] ?: return invalidCommand(input)
-        val status =
+        val result =
             command.handleInput(splitInput.subList(1, splitInput.size))
-        if (status === Command.Result.invalid()) {
+        if (result.status == Command.Status.INVALID) {
             outputter.output("$commandKey: invalid arguments")
         }
-        return status
+        return result
     }
 
     private fun invalidCommand(input: String): Command.Result {

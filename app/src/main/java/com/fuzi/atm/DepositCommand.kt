@@ -1,22 +1,20 @@
 package com.fuzi.atm
 
 import javax.inject.Inject
-import com.fuzi.atm.Command.Result
 import java.math.BigDecimal
+import com.fuzi.atm.Database.Account
 
-class DepositCommand @Inject constructor(val database: Database, val outputter: Outputter) : Command {
+class DepositCommand @Inject constructor(
+    val account: Account,
+    val outputter: Outputter
+) : BigDecimalCommand(outputter) {
+
     override fun key(): String {
         return "deposit"
     }
 
-    override fun handleInput(input: List<String>): Result {
-        if(input.size != 2)
-            return Command.Result.invalid()
-
-        val account = database.getAccount(input[0])
-        account.deposit(BigDecimal(input[1]))
+    override fun handleAmount(amount: BigDecimal) {
+        account.deposit(amount)
         outputter.output("${account.username} now has: ${account.balance()}")
-
-        return Command.Result.handled()
     }
 }
