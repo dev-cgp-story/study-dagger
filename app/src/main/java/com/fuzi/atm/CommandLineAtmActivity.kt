@@ -14,7 +14,7 @@ class CommandLineAtmActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val commands = arrayOf("hello", "login 강명신")
+        val commands = arrayOf("hello", "deposit 강명신 10000", "login 강명신", "deposit 강명신 5000")
 
         val commandRouterFactory = DaggerCommandRouterFactory.create();
         val commandRouter = commandRouterFactory.router()

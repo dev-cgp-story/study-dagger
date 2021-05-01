@@ -7,7 +7,7 @@ class LoginCommand @Inject constructor(val database: Database, val outputter: Ou
         return "login"
     }
 
-    override fun handleArg(username: String): Command.Result? {
+    override fun handleArg(username: String): Command.Result {
         val account = database.getAccount(username)
 
         outputter.output("$username is logged in with balance ${account.balance()}")

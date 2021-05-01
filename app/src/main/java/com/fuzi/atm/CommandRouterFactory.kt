@@ -1,8 +1,10 @@
 package com.fuzi.atm
 
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [LoginCommandModule::class, HelloWorldModule::class, SystemOutModule::class])
+@Singleton
+@Component(modules = [LoginCommandModule::class, HelloWorldModule::class, SystemOutModule::class, UserCommandsModule::class])
 interface CommandRouterFactory {
     fun router(): CommandRouter
 }

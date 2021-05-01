@@ -2,7 +2,9 @@ package com.fuzi.atm
 
 import java.math.BigDecimal
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class Database {
     val accounts = HashMap<String, Account>()
 
@@ -20,5 +22,8 @@ class Database {
         private var balance: BigDecimal = BigDecimal.ZERO
 
         fun balance() = balance
+        fun deposit(value: BigDecimal) {
+            balance += value
+        }
     }
 }

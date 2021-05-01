@@ -10,7 +10,7 @@ interface Command {
     fun key(): String
 
     /** Process the rest of the command's words and do something.  */
-    fun handleInput(input: List<String>?): Result?
+    fun handleInput(input: List<String>): Result
 
 
     class Result(val status: Status , val nestedCommandRouter: Optional<CommandRouter>) {
