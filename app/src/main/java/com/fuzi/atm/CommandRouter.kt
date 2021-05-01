@@ -8,8 +8,8 @@ class CommandRouter {
     private val commands: HashMap<String?, Command> = HashMap()
 
     @Inject
-    constructor(helloWorldCommand: HelloWorldCommand) {
-        commands[helloWorldCommand.key()] = helloWorldCommand
+    constructor(command: Command) {
+        commands[command.key()] = command
     }
 
     fun route(input: String): Command.Status? {
