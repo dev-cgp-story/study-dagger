@@ -9,8 +9,8 @@ class HelloWorldCommand @Inject constructor(val outputter: Outputter) : Command 
         return "hello"
     }
 
-    override fun handleInput(input: List<String?>?): Command.Status? {
+    override fun handleInput(input: List<String?>?): Command.Result? {
         outputter.output("world!")
-        return Command.Status.HANDLED
+        return Command.Result.handled()
     }
 }
