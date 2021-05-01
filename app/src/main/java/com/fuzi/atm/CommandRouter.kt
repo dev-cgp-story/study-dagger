@@ -3,7 +3,10 @@ package com.fuzi.atm
 import android.util.Log
 import javax.inject.Inject
 
-class CommandRouter @Inject constructor(val commands: Map<String, @JvmSuppressWildcards Command>, val outputter: Outputter) {
+class CommandRouter @Inject constructor(
+    val commands: Map<String, @JvmSuppressWildcards Command>,
+    val outputter: Outputter)
+{
     fun route(input: String): Command.Result? {
         val splitInput =
             split(input)
