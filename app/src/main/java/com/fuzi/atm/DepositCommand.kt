@@ -6,7 +6,8 @@ import com.fuzi.atm.Database.Account
 
 class DepositCommand @Inject constructor(
     val account: Account,
-    val outputter: Outputter
+    val outputter: Outputter,
+    val withdrawalLimiter: WithdrawalLimiter
 ) : BigDecimalCommand(outputter) {
 
     override fun key(): String {
@@ -15,6 +16,7 @@ class DepositCommand @Inject constructor(
 
     override fun handleAmount(amount: BigDecimal) {
         account.deposit(amount)
+        withdrawalLimiter.recordDeposit(amount)
         outputter.output("${account.username} now has: ${account.balance()}")
     }
 }
