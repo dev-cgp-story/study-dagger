@@ -1,15 +1,14 @@
 package com.fuzi.atm
 
 import android.util.Log
-import java.util.*
 import javax.inject.Inject
 
 class CommandRouter {
-    private val commands: HashMap<String?, Command> = HashMap()
+    private val commands: Map<String, @JvmSuppressWildcards Command>
 
     @Inject
-    constructor(command: Command) {
-        commands[command.key()] = command
+    constructor(command: Map<String, @JvmSuppressWildcards Command>) {
+        commands = command
     }
 
     fun route(input: String): Command.Result? {
