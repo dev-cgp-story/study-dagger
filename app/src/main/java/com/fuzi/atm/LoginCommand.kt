@@ -1,11 +1,13 @@
 package com.fuzi.atm
 
+import java.util.*
 import javax.inject.Inject
 
 class LoginCommand @Inject constructor(
     val database: Database,
     val outputter: Outputter,
-    val userCommandsRouterFactory: UserCommandsRouter.Factory
+    val userCommandsRouterFactory: UserCommandsRouter.Factory,
+    val account: Optional<Database.Account>
 ) : SingleArgCommand() {
 
     override fun key(): String {
@@ -13,9 +15,18 @@ class LoginCommand @Inject constructor(
     }
 
     override fun handleArg(username: String): Command.Result {
-        val account = database.getAccount(username)
+        if(account.isPresent) {
+            val loggedInUser = account.get().username
+            outputter.output("$loggedInUser is already logged in")
 
-        outputter.output("$username is logged in with balance ${account.balance()}")
-        return Command.Result.enterNestedCommandSet(userCommandsRouterFactory.create(account).router())
+            if(!loggedInUser.equals(username))
+                outputter.output("run `logout` first before trying to log in another user")
+
+            return Command.Result.handled()
+        }
+
+        val newAccount = database.getAccount(username)
+        outputter.output("hello $username")
+        return Command.Result.enterNestedCommandSet(userCommandsRouterFactory.create(newAccount).router())
     }
 }
