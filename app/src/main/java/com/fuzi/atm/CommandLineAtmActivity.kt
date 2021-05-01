@@ -16,7 +16,7 @@ class CommandLineAtmActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val commands = arrayOf("hello", "login 강명신", "deposit 5000", "deposit 5000")
+        val commands = arrayOf("hello", "login 강명신", "deposit 5000", "deposit 5000", "withdraw 500", "withdraw 999")
         val commandProcessor = DaggerCommandLineAtmActivity_CommandProcessorFactory.create().processor()
 
         for (command in commands) {
@@ -25,7 +25,7 @@ class CommandLineAtmActivity : AppCompatActivity() {
     }
 
     @Singleton
-    @Component(modules = [HelloWorldModule::class, LoginCommandModule::class, SystemOutModule::class, UserCommandsRouter.InstallationModule::class])
+    @Component(modules = [HelloWorldModule::class, LoginCommandModule::class, SystemOutModule::class, UserCommandsRouter.InstallationModule::class, AmountsModule::class])
     interface CommandProcessorFactory {
         fun processor(): CommandProcessor
     }

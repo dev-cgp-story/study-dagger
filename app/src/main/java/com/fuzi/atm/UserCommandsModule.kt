@@ -11,4 +11,9 @@ abstract class UserCommandsModule {
     @IntoMap
     @StringKey("deposit")
     abstract fun depositCommand(command: DepositCommand): Command
+
+    @Binds
+    @IntoMap
+    @StringKey("withdraw")
+    abstract fun withdrawCommand(command: WithdrawCommand): Command
 }

@@ -25,5 +25,8 @@ class Database {
         fun deposit(value: BigDecimal) {
             balance += value
         }
+        fun withdraw(value: BigDecimal) {
+            balance -= value
+        }
     }
 }
