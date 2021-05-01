@@ -5,10 +5,12 @@ import java.util.*
 import javax.inject.Inject
 
 class CommandRouter {
-    private val commands: Map<String?, Command> = emptyMap()
+    private val commands: HashMap<String?, Command> = HashMap()
 
     @Inject
-    constructor()
+    constructor(helloWorldCommand: HelloWorldCommand) {
+        commands[helloWorldCommand.key()] = helloWorldCommand
+    }
 
     fun route(input: String): Command.Status? {
         val splitInput =
