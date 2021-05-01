@@ -20,10 +20,10 @@ import com.fuzi.atm.Command.Result
 
 /** Abstract command that accepts a single argument.  */
 abstract class SingleArgCommand : Command {
-    override fun handleInput(input: List<String?>?): Result? {
+    override fun handleInput(input: List<String>?): Result? {
         return if (input!!.size == 1) handleArg(input[0]) else Result.invalid()
     }
 
     /** Handles the single argument to the command.  */
-    protected abstract fun handleArg(arg: String?): Result?
+    protected abstract fun handleArg(arg: String): Result?
 }

@@ -34,7 +34,7 @@ class CommandRouter {
 
     companion object {
         // Split on whitespace
-        private fun split(string: String): List<String?> {
+        private fun split(string: String): List<String> {
             val ret = string.split(" ")
             return ret;
         }
